@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 function EditKegForm (props) {
 
-  const { keg } = props; //Why do we need to destructure props here?
+  const { keg } = props;
 
   function handleEditKegFormSubmission(event) {
     event.preventDefault();
