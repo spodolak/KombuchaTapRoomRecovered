@@ -90,19 +90,29 @@ class KegControl extends React.Component {
     });
   }
 
-  // handleBuyingPint = (id) => {
-  //   const selectedKeg = this.state.masterKegList.filter(keg => keg.id === id)[0];
-  //   const pintsRemaining = selectedKeg.pints -1;
-  //   const kegPurchased = {...selectedKeg, pints: pintsRemaining}; 
-  //   const editedMasterKegList = this.state.masterKegList
-  //     .filter(keg => keg.id !== id)
-  //     .concat(kegPurchased);
-  //   this.setState({
-  //     masterKegList: editedMasterKegList,
-  //     editing: false,
-  //     selectedKeg: null
-  //   });
-  // }
+  handleBuyingPint = (id) => {
+    const selectedKeg = this.state.masterKegList.filter(keg => keg.id === id)[0];
+    if (selectedKeg.pints > 0 ){
+      const pintsRemaining = selectedKeg.pints -1;
+      // const kegPurchased = {...selectedKeg, pints: pintsRemaining}; 
+      const kegPurchased = {        
+        name: selectedKeg.name,
+        brand: selectedKeg.brand,
+        price: selectedKeg.price,
+        flavor: selectedKeg.flavor,
+        pints: pintsRemaining,
+        id: selectedKeg.id
+      }; 
+      const updatedMasterKegList = this.state.masterKegList
+      .filter(keg => keg.id !== id)
+      .concat(kegPurchased);
+      this.setState({
+        masterKegList: updatedMasterKegList,
+        editing: false,
+        selectedKeg: null
+      });
+    }
+  }
 
   render(){
     let currentlyVisibleState = null;
